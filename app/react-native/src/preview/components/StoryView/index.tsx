@@ -17,6 +17,8 @@ interface State {
 }
 
 export default class StoryView extends Component<Props, State> {
+  state = {};
+
   componentDidMount() {
     if (this.props.listenToEvents) {
       const channel = addons.getChannel();
@@ -78,6 +80,9 @@ export default class StoryView extends Component<Props, State> {
 
   renderListening = () => {
     const { storyFn, selection } = this.state;
+
+    if (!storyFn || !selection) return this.renderHelp();
+
     const { kind, story } = selection;
 
     return storyFn ? (
